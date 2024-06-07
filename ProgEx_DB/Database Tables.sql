@@ -14,7 +14,7 @@ CREATE TABLE [dbo].[AccountMaster](
 	[Name] nvarchar(50) NOT NULL,
 	[AccountID] int IDENTITY(1,1) NOT NULL,
 	[Phone_Number] nvarchar(20) NOT NULL,
-	[EmailId] nvarchar(20) NOT NULL,
+	[Email_ID] nvarchar(20) NOT NULL,
 	[Balance_Amount] decimal(10, 2) NOT NULL,
 	[Address1] nvarchar(MAX) NOT NULL,
 	[Address2] nvarchar(MAX) NOT NULL,
@@ -132,8 +132,13 @@ PRINT('Create [MonthMaster]')
 DROP TABLE IF EXISTS [dbo].[MonthMaster];
 CREATE TABLE [dbo].[MonthMaster](
 	[MonthName] nvarchar(50) NOT NULL,
-	[MonthValue] int NOT NULL
+	[Month_ID] int identity(1,1) NOT NULL
+ CONSTRAINT [PK_MonthMaster_MonthID] PRIMARY KEY CLUSTERED
+(
+	[Month_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) 
+
 
 --Object:  Table [dbo].[Sales_Info]
 PRINT('Create [Sales_Info]')
@@ -219,4 +224,41 @@ CREATE TABLE [dbo].[UserMaster](
 	[UserID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 )
+
+--Object:  Table [dbo].[DayMaster]
+PRINT('Create [DayMaster]')
+Drop Table if Exists [dbo].[DayMaster];
+CREATE TABLE [dbo].[DayMaster](
+	[Day] nvarchar(30) NOT NULL,
+	[Day_ID] int identity(1,1) NOT NULL
+ CONSTRAINT [PK_DayMaster_DayID] PRIMARY KEY CLUSTERED
+
+(
+	[DAY_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) 
+
+--Object:  Table [dbo].[AccountMasterTypeID]
+PRINT('Create [AccountMasterTypeID]')
+Drop Table if Exists [dbo].[AccountMasterTypeID];
+CREATE TABLE [dbo].[AccountMasterTypeID](
+	[AccMasTypeID] int identity(1,1) NOT NULL,
+	[Description] nvarchar(50) NOT NULL
+ CONSTRAINT [PK_AccMasType_AccMasTypeID] PRIMARY KEY CLUSTERED
+(
+	[AccMasTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) 
+
+--Object:  Table [dbo].[TransactionMasterTypeID]
+PRINT('Create [TransactionMasterTypeID]')
+Drop Table if Exists [dbo].[TransactionMasterTypeID];
+CREATE TABLE [dbo].[TransactionMasterTypeID](
+	[TransMasTypeID] int identity(1,1) NOT NULL,
+	[Description] nvarchar(50) NOT NULL
+ CONSTRAINT [PK_TransMasType_AccMasTypeID] PRIMARY KEY CLUSTERED
+(
+	[TransMasTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) 
 
